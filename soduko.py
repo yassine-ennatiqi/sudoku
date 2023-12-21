@@ -5,25 +5,13 @@ def validing(list):
                     return False
                     
         return True        
-def coping(lisst1,lisst2,falsing,cont):
-    for i in range(9):
-        lisst2=lisst1[i]
-        if validing(lisst2):
-            cont+=1
-        else:
-            falsing+= str(i+1)+" ,"
-
-    if cont == 9:
-        print(f"***** row true*****")
-    else:
-        print(f"***** row false in row {falsing}*****")
-
+# **********************************************************************************************************************************************************************************
 def inputing(entrer):
     while entrer != "1" and entrer != "2" and entrer != "3" and entrer != "4" and entrer != "5" and entrer != "6" and entrer != "7" and entrer != "8" and entrer != "9" :
         print("le nombre incorect")
         entrer=(input("entrer le numero de entreron: "))
     return entrer    
-
+# **********************************************************************************************************************************************************************************
 
 def forming():
     for i in range(9):
@@ -38,6 +26,9 @@ def forming():
         print()
         if i in [8]:
             print("+-----------------------+")
+
+# **********************************************************************************************************************************************************************************
+
                                         ########## 
                                 ########## Main ##########  
                                         ########## 
@@ -47,7 +38,7 @@ list1=[
         ["1","9","7","8","3","4","5","6","2"],
         ["8","2","6","1","9","5","3","4","7"],
         ["3","7","4","6","8","2","9","1","5"],
-        ["9","5","1","7","4","1","6","2","8"],
+        ["9","5","1","7","4","3","6","2","8"],
         ["5","1","9","3","2","6","8","7","4"],
         ["2","4","8","9","5","7","1","3","6"],
         ["7","6","3","4","1","8","2","5","9"],
@@ -78,7 +69,7 @@ while lign!="start" :
     if lign == "stop":
         exit()
     lign=str(input(r"entrer 'start' pour start or 'stop' pou stoper: "))
-
+# **********************************************************************************************************************************************************************************
 while lign!="stop": 
     forming()
     
@@ -101,31 +92,66 @@ while lign!="stop":
     num = int(num)
 
     list1[lign-1][col-1]=str(num)
-list11=[]
-coping(list1,list11,rowFalse,conteur)
+
+# **********************************************************************************************************************************************************************************
+
+listRow=[]
+for i in range(9):
+        listRow=list1[i]
+        if validing(listRow):
+            conteur+=1
+        else:
+            rowFalse+= str(i+1)+" ,"
+if conteur == 9:
+        print(f"***** row true*****")
+else:
+    print(f"***** row false in row {rowFalse}*****")
+
+# **********************************************************************************************************************************************************************************
 
 listColonprincipale=[]
 for elementColonPrincipale in range(9):
     listColon=[]
     for elementColonScondaire in range(9):
-        a=list1[elementColonScondaire][elementColonPrincipale]
-        listColon.append(a)
+        listColon.append(list1[elementColonScondaire][elementColonPrincipale])
     listColonprincipale.append(listColon)
 
-coping(listColonprincipale,listColon,colFalse,conteur1)
+# **********************************************************************************************************************************************************************************
 
+for i in range(9):
+    listColon=listColonprincipale[i]
+    if validing(listColon):
+        conteur1+=1
+    else:
+        colFalse+= str(i+1)+" ,"
+if conteur1 == 9:
+        print(f"***** col true*****")
+else:
+    print(f"***** col false in col {colFalse}*****")
 
-list100=[]
+# **********************************************************************************************************************************************************************************
+
+listBlocPrincipale=[]
 for i in range(0,9,3):
     for y in range(0,9,3):
-            list200=[]
+            listBloc=[]
             for j in range(i,i+3):
                 for x in range(y,y+3):
-                    list200.append(list1[j][x]) 
-            list100.append(list200)
+                    listBloc.append(list1[j][x]) 
+            listBlocPrincipale.append(listBloc)
 
-coping(list100,list200,blocFalse,conteur2)
+# **********************************************************************************************************************************************************************************
 
+for i in range(9):
+    listBloc=listBlocPrincipale[i]
+    if validing(listBloc):
+        conteur2+=1
+    else:
+        blocFalse+= str(i+1)+" ,"
+if conteur2 == 9:
+        print(f"***** bloc true*****")
+else:
+    print(f"***** bloc false in bloc {blocFalse}*****")
 
 
 
