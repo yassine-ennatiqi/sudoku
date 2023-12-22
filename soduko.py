@@ -6,11 +6,16 @@ def validing(list):
                     
         return True        
 # **********************************************************************************************************************************************************************************
-def inputing(entrer):
-    while entrer != "1" and entrer != "2" and entrer != "3" and entrer != "4" and entrer != "5" and entrer != "6" and entrer != "7" and entrer != "8" and entrer != "9" :
+def inputingCol(col):
+    while col != "1" and col != "2" and col != "3" and col != "4" and col != "5" and col != "6" and col != "7" and col != "8" and col != "9" :
         print("le nombre incorect")
-        entrer=(input("entrer le numero de entreron: "))
-    return entrer    
+        col=(input(f"entrer le numero de colon: "))
+    return col
+def inputingNum(num):
+    while num != "1" and num != "2" and num != "3" and num != "4" and num != "5" and num != "6" and num != "7" and num != "8" and num != "9" :
+        print("le nombre incorect")
+        num=(input(f"entrer le nombre: "))
+    return num    
 # **********************************************************************************************************************************************************************************
 
 def forming():
@@ -71,21 +76,93 @@ while lign!="start" :
     lign=str(input(r"entrer 'start' pour start or 'stop' pou stoper: "))
 # **********************************************************************************************************************************************************************************
 while lign!="stop": 
+    conteur=0
+
+    conteur1=0
+
+    conteur2=0
+
+    rowFalse=""
+
+    colFalse=""
+
+    blocFalse=""
+    
     forming()
     
-    lign=(input("entrer le numero de ligne ou entrer 'stop' pour stop: "))
-    while lign!="stop" and lign != "1" and lign != "2" and lign != "3" and lign != "4" and lign != "5" and lign != "6" and lign != "7" and lign != "8" and lign != "9":
+    lign=(input("entrer le numero de ligne ou entrer 'stop' pour stop ou entrer 'exit' pour exit: "))
+    while lign!="exit" and lign!="stop" and lign != "1" and lign != "2" and lign != "3" and lign != "4" and lign != "5" and lign != "6" and lign != "7" and lign != "8" and lign != "9":
         print("le nombre incorect")
         lign=(input("entrer le numero de ligne ou entrer 'stop' pour stop: "))
 
+    if lign=="exit":
+         exit()
     if lign=="stop":
-        break
+        listRow=[]
+        for i in range(9):
+                listRow=list1[i]
+                if validing(listRow):
+                    conteur+=1
+                else:
+                    rowFalse+= str(i+1)+" ,"
+        if conteur == 9:
+                print(f"***** row true*****")
+        else:
+            print(f"***** row false in row {rowFalse}*****")
+
+        # **********************************************************************************************************************************************************************************
+
+        listColonprincipale=[]
+        for elementColonPrincipale in range(9):
+            listColon=[]
+            for elementColonScondaire in range(9):
+                listColon.append(list1[elementColonScondaire][elementColonPrincipale])
+            listColonprincipale.append(listColon)
+
+        # **********************************************************************************************************************************************************************************
+
+        for i in range(9):
+            listColon=listColonprincipale[i]
+            if validing(listColon):
+                conteur1+=1
+            else:
+                colFalse+= str(i+1)+" ,"
+        if conteur1 == 9:
+                print(f"***** col true*****")
+        else:
+            print(f"***** col false in col {colFalse}*****")
+
+        # **********************************************************************************************************************************************************************************
+
+        listBlocPrincipale=[]
+        for i in range(0,9,3):
+            for y in range(0,9,3):
+                    listBloc=[]
+                    for j in range(i,i+3):
+                        for x in range(y,y+3):
+                            listBloc.append(list1[j][x]) 
+                    listBlocPrincipale.append(listBloc)
+
+        # **********************************************************************************************************************************************************************************
+
+        for i in range(9):
+            listBloc=listBlocPrincipale[i]
+            if validing(listBloc):
+                conteur2+=1
+            else:
+                blocFalse+= str(i+1)+" ,"
+        if conteur2 == 9:
+                print(f"***** bloc true*****")
+        else:
+            print(f"***** bloc false in bloc {blocFalse}*****")
+        lign = ""
+        continue
 
     col=(input("entrer le numero de colon: "))  
-    col=inputing(col)  
+    col=inputingCol(col)  
 
     num=(input("entrer le nombre: "))
-    inputing(num)
+    num=inputingNum(num)
 
     lign = int(lign)
     col = int(col)
@@ -93,65 +170,6 @@ while lign!="stop":
 
     list1[lign-1][col-1]=str(num)
 
-# **********************************************************************************************************************************************************************************
-
-listRow=[]
-for i in range(9):
-        listRow=list1[i]
-        if validing(listRow):
-            conteur+=1
-        else:
-            rowFalse+= str(i+1)+" ,"
-if conteur == 9:
-        print(f"***** row true*****")
-else:
-    print(f"***** row false in row {rowFalse}*****")
-
-# **********************************************************************************************************************************************************************************
-
-listColonprincipale=[]
-for elementColonPrincipale in range(9):
-    listColon=[]
-    for elementColonScondaire in range(9):
-        listColon.append(list1[elementColonScondaire][elementColonPrincipale])
-    listColonprincipale.append(listColon)
-
-# **********************************************************************************************************************************************************************************
-
-for i in range(9):
-    listColon=listColonprincipale[i]
-    if validing(listColon):
-        conteur1+=1
-    else:
-        colFalse+= str(i+1)+" ,"
-if conteur1 == 9:
-        print(f"***** col true*****")
-else:
-    print(f"***** col false in col {colFalse}*****")
-
-# **********************************************************************************************************************************************************************************
-
-listBlocPrincipale=[]
-for i in range(0,9,3):
-    for y in range(0,9,3):
-            listBloc=[]
-            for j in range(i,i+3):
-                for x in range(y,y+3):
-                    listBloc.append(list1[j][x]) 
-            listBlocPrincipale.append(listBloc)
-
-# **********************************************************************************************************************************************************************************
-
-for i in range(9):
-    listBloc=listBlocPrincipale[i]
-    if validing(listBloc):
-        conteur2+=1
-    else:
-        blocFalse+= str(i+1)+" ,"
-if conteur2 == 9:
-        print(f"***** bloc true*****")
-else:
-    print(f"***** bloc false in bloc {blocFalse}*****")
 
 
 
